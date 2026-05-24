@@ -1,0 +1,65 @@
+Here’s a neat little **Stock Portfolio Tracker in Python** that fits your simplified scope:
+
+---
+
+### 💻 Python Code Example
+
+```python
+# Hardcoded stock prices
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "MSFT": 320,
+    "GOOG": 140,
+    "AMZN": 130
+}
+
+def stock_tracker():
+    portfolio = {}
+    total_investment = 0
+
+    print("Welcome to the Stock Portfolio Tracker!")
+    print("Available stocks:", ", ".join(stock_prices.keys()))
+
+    while True:
+        stock = input("Enter stock symbol (or 'done' to finish): ").upper()
+        if stock == "DONE":
+            break
+        if stock not in stock_prices:
+            print("Invalid stock symbol. Try again.")
+            continue
+
+        qty = int(input(f"Enter quantity of {stock}: "))
+        portfolio[stock] = portfolio.get(stock, 0) + qty
+
+    print("\n--- Portfolio Summary ---")
+    for stock, qty in portfolio.items():
+        value = stock_prices[stock] * qty
+        total_investment += value
+        print(f"{stock}: {qty} shares → ${value}")
+
+    print(f"\nTotal Investment Value: ${total_investment}")
+
+    # Optional: Save to file
+    save = input("Save results to file? (y/n): ").lower()
+    if save == "y":
+        with open("portfolio.txt", "w") as f:
+            f.write("--- Portfolio Summary ---\n")
+            for stock, qty in portfolio.items():
+                value = stock_prices[stock] * qty
+                f.write(f"{stock}: {qty} shares → ${value}\n")
+            f.write(f"\nTotal Investment Value: ${total_investment}\n")
+        print("Portfolio saved to portfolio.txt")
+
+# Run the tracker
+stock_tracker()
+```
+
+---
+
+### ⚙️ How It Works
+- **Dictionary**: Hardcoded stock prices.  
+- **User input**: Enter stock symbols and quantities.  
+- **Calculation**: Multiplies price × quantity for each stock.  
+- **Output**: Shows per-stock value and total investment.  
+- **File handling**: Optionally saves results to `portfolio.txt`.  
